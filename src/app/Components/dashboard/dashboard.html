@@ -1,0 +1,94 @@
+ 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMov">
+  Nuevo movimiento
+</button>
+
+<div class="modal fade" id="modalMov" tabindex="-1" aria-labelledby="modalMov" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo movimiento</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+    <form (ngSubmit)="guardarMov()">
+        <div class="modal-body">
+        <div class="row">
+            <div class="col-sm mb-3">
+                <label for="tipoMovInput" class="form-label">Tipo de movimiento</label>
+                <select id="tipoMovInput" class="form-select form-select-sm" aria-label="Small select example" [(ngModel)]="form.tipo" name="tipo" required>
+                    <option value="" selected disabled>Movimiento</option>
+                    <option value="Reparacion">Reparación</option>
+                    <option value="Venta">Venta</option>
+                    <option value="Fabricacion">Fabricación</option>
+                </select>
+            </div>
+            <div class="col-sm mb-3">
+                <label for="folioNotaInput" class="form-label">Folio nota</label>
+                <input type="text" class="form-control" id="folioNotaInput" [(ngModel)]="form.folioNota" name="folioNota" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm mb-3">
+                <label for="clienteInput" class="form-label">Nombre del cliente</label>
+                <input type="text" class="form-control" id="clienteInput"[(ngModel)]="form.cliente" name="cliente" required>
+            </div>
+            <div class="col-sm mb-3">
+                <label for="precioInput" class="form-label">Precio</label>
+                <input type="text" class="form-control" id="precioInput"[(ngModel)]="form.precio" name="precio" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm mb-3">
+                <label for="fechaOrdenInput" class="form-label">Fecha de orden</label>
+                <input type="date" id="fechaOrdenInput" class="form-control" [(ngModel)]="form.fechaOrden" name="fechaOrden" required>
+            </div>
+            <div class="col-sm mb-3">
+                <label for="fechaEntregaInput" class="form-label">Fecha de entrega</label>
+                <input type="date" id="fechaEntregaInput" class="form-control" [(ngModel)]="form.fechaEntrega" name="fechaEntrega" required>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+        <label for="descripcionMov" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcionMov" rows="3" [(ngModel)]="form.descripcion" name="descripcion" required></textarea>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary" data-bs-dismiss="modal">Guardar cambios</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Fecha Orden</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpoTabla">
+        <tr *ngFor="let mov of movimientos">
+
+            <td>{{mov.id}}</td>
+            <td>{{ mov.fechaOrden }}</td>
+            <td>{{ mov.tipo }}</td>
+            <td>{{ mov.cliente }}</td>
+            <td>{{ mov.precio }}</td>
+            <td>
+                <button class="btn btn-sm btn-danger" (click)="eliminarMov(mov.id)">
+                Eliminar
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+ 
